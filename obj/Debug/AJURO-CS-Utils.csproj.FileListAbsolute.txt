@@ -1,0 +1,5 @@
+C:\PRO\CS\AJURO-CS-Utils\bin\Debug\AJURO-CS-Utils.dll
+C:\PRO\CS\AJURO-CS-Utils\bin\Debug\AJURO-CS-Utils.pdb
+C:\PRO\CS\AJURO-CS-Utils\obj\Debug\AJURO-CS-Utils.dll
+C:\PRO\CS\AJURO-CS-Utils\obj\Debug\AJURO-CS-Utils.pdb
+C:\PRO\CS\AJURO-CS-Utils\obj\Debug\AJURO-CS-Utils.csprojResolveAssemblyReference.cache
