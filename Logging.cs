@@ -139,7 +139,7 @@ namespace AJURO_CS_Utils
         /*
          * @itemIndex the item index
          * */
-        public void CountChanged(int totalItems, string itemType, string processType)
+        public void CountChanged(int totalItems, string itemType = "item", string processType = "process")
         {
             TotalItems = totalItems;
             ItemType = itemType;
