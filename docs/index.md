@@ -2,6 +2,16 @@
 
 No business-specific code. Pure utilities.
 
+### Good prectices advice
+
+Keep business specific isolated from all support code.
+
+Organize support code on topics and keep a good isolation of concerns.
+
+# Logging
+
+Working on multipe items might take a while. Be gente with the user and let him know about the processing progress.
+
 ### Output Sample
 
 Here a sample of logging the progress to console
@@ -15,46 +25,53 @@ There are 35121 files to mark
 35117 C:\PRO\ANG\AJURO-seed-Angular-HTTPClient\angular-cli\e2e\app.po.ts 26%
 ```
 
-# Logging
-
-Working on multipe items might take a while. Be gente with the user and let him know about the processing progress.
-
 Step 1:
 
 Create an instance of the LoggingSystem
 ```
-        AJURO_CS_Utils.LoggingSystem ajuroLoggingSystemForProcessingFiles = new AJURO_CS_Utils.LoggingSystem();
+AJURO_CS_Utils.LoggingSystem ajuroLoggingSystemForProcessingFiles = new AJURO_CS_Utils.LoggingSystem();
 ```
 
 Step 2:
 
 Let the LoggingSystem know how many objects you have and, optionally, how do you prefer to call them:
 ```
-        ajuroLoggingSystemForProcessingFiles.CountChanged(allPaths.Count, "file", "mark");
+ajuroLoggingSystemForProcessingFiles.CountChanged(allPaths.Count, "file", "mark");
 ```
 
 Step 3:
 
 Let the LoggingSystem know when you start processing a new item. 
 ```
-        ajuroLoggingSystemForProcessingFiles.IndexChanged(i, path);
+ajuroLoggingSystemForProcessingFiles.IndexChanged(i, path);
+Stopwatch stopWatch = new Stopwatch();
+long initialMiliseconds = stopWatch.ElapsedMilliseconds;
+foreach (string path in allPaths)
+{
+	stopWatch.Start();
+	// Do some magic
+	stopWatch.Stop();
+	long currentMiliseconds = stopWatch.ElapsedMilliseconds - initialMiliseconds;
+	initialMiliseconds = stopWatch.ElapsedMilliseconds;
+}
+ajuroLoggingSystemForProcessingFiles.IndexCompleted(currentMiliseconds);
 ```
 
 Step 4:
 
 Let the LoggingSystem know about the progress of big files.
 ```
-		// Show the progress
-		for (int i = 0; i < fileContent.Length; i++)
+// Show the progress
+for (int i = 0; i < fileContent.Length; i++)
+{
+	if (fileContent.Length > 10000)
+	{
+		int percentCompleted = i/ (fileContent.Length / 100);
+		if ( lastPercentage != percentCompleted && i % 100 == 0 )
 		{
-			if (fileContent.Length > 10000)
-			{
-				int percentCompleted = i/ (fileContent.Length / 100);
-				if ( lastPercentage != percentCompleted && i % 100 == 0 )
-				{
-					ajuroLoggingSystemForProcessingFiles.ItemPercentChanged(percentCompleted);
-					lastPercentage = percentCompleted;
-				}
-			}
-			}
+			ajuroLoggingSystemForProcessingFiles.ItemPercentChanged(percentCompleted);
+			lastPercentage = percentCompleted;
+		}
+	}
+}
 ```
