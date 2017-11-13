@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AJURO_CS_Utils
 {
+    // All files heplers
     public class Files
     {
         public List<string> RecursiveProcess(string rootDirectory, List<string> acceptedExtensions, bool searchRecursively, Func<string, int> fileProcessor)
