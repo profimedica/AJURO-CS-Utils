@@ -8,6 +8,7 @@ Keep business specific isolated from all support code.
 
 Organize support code on topics and keep a good isolation of concerns.
 
+
 # Logging
 
 Working on multipe items might take a while. Be gente with the user and let him know about the processing progress.
@@ -74,4 +75,23 @@ for (int i = 0; i < fileContent.Length; i++)
 		}
 	}
 }
+```
+
+# Time
+
+Convert elapsed miliseconds to readable elapsed time
+
+Output Example:
+```
+2 days 4 hours 13 minutes 5 seconds and 876 miliseconds
+15 seconds and 12 miliseconds
+```
+
+# Files
+
+Recursively map a function over the files with specified file extension.
+
+Call Example
+```
+files.RecursiveProcess(@"C:\PRO\ANG\AJURO-seed-Angular-HTTPClient\angular-cli", new List<string>() { "js", "ts" }, true, MyFunctions);
 ```
